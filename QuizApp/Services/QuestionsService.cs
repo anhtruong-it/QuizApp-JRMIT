@@ -17,6 +17,11 @@ namespace QuizApp.Services
             _context.Questions.Add(questions);
             _context.SaveChanges();
         }
+        public void AddAnswer(Answers answers)
+        {
+            _context.Answers.Add(answers);
+            _context.SaveChanges();
+        }
         public void Edit(Questions questions) 
         {
             _context.Questions.Update(questions);
@@ -24,9 +29,7 @@ namespace QuizApp.Services
 
         }
 
-       
-
-
         public Questions GetById(int id) => _context.Questions.FirstOrDefault(x => x.QuestionId == id);
+        public Answers GetByQuestionId(int id) => _context.Answers.FirstOrDefault(x => x.QuestionId == id);
     }
 }

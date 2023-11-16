@@ -9,6 +9,8 @@ namespace QuizApp.Models
         public int QuizId { get; set; }
         public string Content { get; set; }
         public int CorrectAnswerId { get; set; }
+        public List<Answers> Answers { get; set; }
+
 
 
     }

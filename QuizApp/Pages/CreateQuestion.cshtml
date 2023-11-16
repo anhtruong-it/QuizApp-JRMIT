@@ -24,6 +24,26 @@
                 <input name="Question.CorrectAnswerId" type="number" class="form-control" id="correctanswerid" rows="3"></input>
                 <span asp-validation-for="@Model.Question.CorrectAnswerId"></span>
             </div>
+            <div class="mb-3">
+                <label for="answercontenta" class="form-label">Answer Content A</label>
+                <input name="Question.Answers[0].Content" type="text" class="form-control" id="answercontenta" rows="3"></input>
+                <span asp-validation-for="Question.Answers[0].Content"></span>
+            </div>
+            <div class="mb-3">
+                <label for="answercontentb" class="form-label">Answer Content B</label>
+                <input name="Question.Answers[1].Content" type="text" class="form-control" id="answercontentb" rows="3"></input>
+                <span asp-validation-for="Question.Answers[1].Content"></span>
+            </div>
+@*            <div class="mb-3">
+                <label for="answercontentc" class="form-label">Answer Content C</label>
+                <input name="Question.Answers[0].Content" type="text" class="form-control" id="answercontentc" rows="3"></input>
+                <span asp-validation-for="Question.Answers[0].Content"></span>
+            </div>
+            <div class="mb-3">
+                <label for="answercontentd" class="form-label">Answer Content D</label>
+                <input name="Question.Answers[0].Content" type="text" class="form-control" id="answercontentd" rows="3"></input>
+                <span asp-validation-for="Question.Answers[0].Content"></span>
+            </div>*@
 
             <button type="submit" class="btn btn-success">Create Question</button>
         </form>
