@@ -1,0 +1,38 @@
+﻿@page "{id:int}"
+@model QuizApp.Pages.EditQuestionModel
+@{
+    ViewData["Title"] = "Update Question";
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <form method="post">
+            <div class="mb-3">
+                <label for="questionid" class="form-label">QuestionId</label>
+                <input name="Question.QuestionId" type="text" class="form-control" id="questionid" value="@Model.Question.QuestionId" readonly />
+                <span asp-validation-for="@Model.Question.QuestionId"></span>
+            </div>
+            <div class="mb-3">
+                <label for="quizid" class="form-label">QuizId</label>
+                <input name="Question.QuizId" type="number" class="form-control" id="quizid" placeholder="@Model.Question.QuizId"  />
+                <span asp-validation-for="@Model.Question.QuizId"></span>
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label>
+                <input name="Question.Content" type="text" class="form-control" id="content" placeholder="@Model.Question.Content" />
+                <span asp-validation-for="@Model.Question.Content"></span>
+            </div>
+            <div class="mb-3">
+                <label for="correctanswerid" class="form-label">Correct Answer Id</label>
+                <input name="Question.CorrectAnswerId" type="number" class="form-control" id="correctanswerid" rows="3" placeholder="@Model.Question.CorrectAnswerId"></input>
+                <span asp-validation-for="@Model.Question.CorrectAnswerId"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success">Update Question</button>
+            <a asp-page="/Questions" class="btn btn-secondary">Cancel</a>
+        </form>
+
+    </div>
+</div>
