@@ -25,14 +25,14 @@
                 <th scope="row">@_question.QuestionId</th>
                 <td>@_question.QuizId</td>
                 <td>@_question.Content</td>
-                <td>
+               @* <td>
                     <ul>
                         @foreach (var _answer in Model.Answers.Where(a => a.QuestionId == _question.QuestionId))
                         {
                             <li>@_answer.Content</li>
                         }
                     </ul>
-                </td>
+                </td>*@
                 <td><a href="/EditQuestion/@_question.QuestionId" class="btn btn-secondary">Edit Question</a></td>
             </tr>
         }

@@ -37,12 +37,9 @@ namespace QuizApp.Migrations
                     b.Property<int>("QuestionId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("QuestionsQuestionId")
-                        .HasColumnType("integer");
-
                     b.HasKey("AnswerId");
 
-                    b.HasIndex("QuestionsQuestionId");
+                    b.HasIndex("QuestionId");
 
                     b.ToTable("Answers");
                 });
@@ -62,7 +59,7 @@ namespace QuizApp.Migrations
                     b.Property<int>("CorrectAnswerId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("QuizId")
+                    b.Property<int?>("QuizId")
                         .HasColumnType("integer");
 
                     b.Property<int?>("QuizzesQuizId")
@@ -94,7 +91,7 @@ namespace QuizApp.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("UsersUserId")
+                    b.Property<int>("UsersUserId")
                         .HasColumnType("integer");
 
                     b.HasKey("QuizId");
@@ -131,9 +128,13 @@ namespace QuizApp.Migrations
 
             modelBuilder.Entity("QuizApp.Models.Answers", b =>
                 {
-                    b.HasOne("QuizApp.Models.Questions", null)
+                    b.HasOne("QuizApp.Models.Questions", "Question")
                         .WithMany("Answers")
-                        .HasForeignKey("QuestionsQuestionId");
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("QuizApp.Models.Questions", b =>
@@ -145,9 +146,13 @@ namespace QuizApp.Migrations
 
             modelBuilder.Entity("QuizApp.Models.Quizzes", b =>
                 {
-                    b.HasOne("QuizApp.Models.Users", null)
+                    b.HasOne("QuizApp.Models.Users", "Users")
                         .WithMany("Quizzes")
-                        .HasForeignKey("UsersUserId");
+                        .HasForeignKey("UsersUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("QuizApp.Models.Questions", b =>

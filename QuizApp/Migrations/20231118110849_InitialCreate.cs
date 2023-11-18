@@ -35,7 +35,7 @@ namespace QuizApp.Migrations
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     CreatedBy = table.Column<int>(type: "integer", nullable: false),
-                    UsersUserId = table.Column<int>(type: "integer", nullable: true)
+                    UsersUserId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,7 +44,8 @@ namespace QuizApp.Migrations
                         name: "FK_Quizzes_Users_UsersUserId",
                         column: x => x.UsersUserId,
                         principalTable: "Users",
-                        principalColumn: "UserId");
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -53,7 +54,7 @@ namespace QuizApp.Migrations
                 {
                     QuestionId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    QuizId = table.Column<int>(type: "integer", nullable: false),
+                    QuizId = table.Column<int>(type: "integer", nullable: true),
                     Content = table.Column<string>(type: "text", nullable: false),
                     CorrectAnswerId = table.Column<int>(type: "integer", nullable: false),
                     QuizzesQuizId = table.Column<int>(type: "integer", nullable: true)
@@ -75,23 +76,23 @@ namespace QuizApp.Migrations
                     AnswerId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     QuestionId = table.Column<int>(type: "integer", nullable: false),
-                    Content = table.Column<string>(type: "text", nullable: false),
-                    QuestionsQuestionId = table.Column<int>(type: "integer", nullable: true)
+                    Content = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Answers", x => x.AnswerId);
                     table.ForeignKey(
-                        name: "FK_Answers_Questions_QuestionsQuestionId",
-                        column: x => x.QuestionsQuestionId,
+                        name: "FK_Answers_Questions_QuestionId",
+                        column: x => x.QuestionId,
                         principalTable: "Questions",
-                        principalColumn: "QuestionId");
+                        principalColumn: "QuestionId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Answers_QuestionsQuestionId",
+                name: "IX_Answers_QuestionId",
                 table: "Answers",
-                column: "QuestionsQuestionId");
+                column: "QuestionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Questions_QuizzesQuizId",

@@ -11,7 +11,10 @@ namespace QuizApp.Pages
         public Questions? Question { get; set; }
 
         [BindProperty]
-        public Answers? Answers { get; set; }
+        public List<Answers> Answers { get; set; }
+
+        [BindProperty]
+        public int CorrectAnswer { get; set; }
 
         private IQuestionsService _service { get; set; }
         public CreateQuestionModel(IQuestionsService service)
@@ -31,19 +34,30 @@ namespace QuizApp.Pages
             //    return Page();
             //}
             _service.Add(Question);
+            var value = $"{CorrectAnswer}";
 
-            foreach (var answer in Question?.Answers.ToArray())
-            {
-                var anscontent = $"{answer.Content}";
-            }
-            var value1 = Question?.Answers.ToArray();
+            for (int i = 0; i < Answers.Count; i++)
 
-            foreach (var answer in Question.Answers.ToArray())
             {
+                var answer = Answers[i];
                 answer.QuestionId = Question.QuestionId;
+                var ans = $"{i} - {answer.AnswerId} - {answer.QuestionId} - {answer.Content}";
                 _service.AddAnswer(answer);
-            }
+                if (CorrectAnswer == i)
+                {
+                    Question.CorrectAnswerId = answer.AnswerId;
+                }
 
+            }
+            var existingQuestion = _service.GetById(Question.QuestionId);
+            existingQuestion.QuizId = Question.QuizId;
+            existingQuestion.Content = Question.Content;
+            existingQuestion.CorrectAnswerId = Question.CorrectAnswerId;
+            _service.Edit(existingQuestion);
+        
+
+
+            //return Redirect($"/CreateAnswers/{Question.QuestionId}");
             return Redirect("/Questions");
         }
     }
