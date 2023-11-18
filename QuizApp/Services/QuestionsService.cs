@@ -30,6 +30,7 @@ namespace QuizApp.Services
         }
 
         public Questions GetById(int id) => _context.Questions.FirstOrDefault(x => x.QuestionId == id);
-        public Answers GetByQuestionId(int id) => _context.Answers.FirstOrDefault(x => x.QuestionId == id);
+        public List<Answers> GetByQuestionId(int id) => _context.Answers.Where(x => x.QuestionId == id).ToList();
+        public Answers GetByCorrectAnswerId(int id) =>  _context.Answers.FirstOrDefault(x => x.AnswerId == id);
     }
 }

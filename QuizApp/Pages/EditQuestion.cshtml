@@ -25,10 +25,32 @@
                 <span asp-validation-for="@Model.Question.Content"></span>
             </div>
             <div class="mb-3">
-                <label for="correctanswerid" class="form-label">Correct Answer Id</label>
-                <input name="Question.CorrectAnswerId" type="number" class="form-control" id="correctanswerid" rows="3" placeholder="@Model.Question.CorrectAnswerId"></input>
-                <span asp-validation-for="@Model.Question.CorrectAnswerId"></span>
+                <label for="answercontenta" class="form-label">Answer Content A</label>
+                <input name="Answers[0].Content" type="text" class="form-control" id="answercontenta" placeholder="@Model.Answers[0].Content" rows="3"></input>
+                <span asp-validation-for="@Model.Answers[0].Content"></span>
             </div>
+            <div class="mb-3">
+                <label for="answercontentb" class="form-label">Answer Content B</label>
+                <input name="Answers[1].Content" type="text" class="form-control" id="answercontentb" placeholder="@Model.Answers[1].Content" rows="3"></input>
+                <span asp-validation-for="@Model.Answers[1].Content"></span>
+            </div>
+            <div class="mb-3">
+                <label for="answercontentc" class="form-label">Answer Content C</label>
+                <input name="Answers[2].Content" type="text" class="form-control" id="answercontentc" placeholder="@Model.Answers[2].Content" rows="3"></input>
+                <span asp-validation-for="@Model.Answers[2].Content"></span>
+            </div>
+            <div class="mb-3">
+                <label for="answercontentd" class="form-label">Answer Content D</label>
+                <input name="Answers[3].Content" type="text" class="form-control" id="answercontentd" placeholder="@Model.Answers[3].Content" rows="3"></input>
+                <span asp-validation-for="@Model.Answers[3].Content"></span>
+            </div>
+            <select name="Question.CorrectAnswerId" required>
+                <option value="">Correct Answer</option>
+                <option value=0>A</option>
+                <option value=1>B</option>
+                <option value=2>C</option>
+                <option value=3>D</option>
+            </select>
 
             <button type="submit" class="btn btn-success">Update Question</button>
             <a asp-page="/Questions" class="btn btn-secondary">Cancel</a>

@@ -27,12 +27,6 @@ namespace QuizApp.Pages
 
         public IActionResult OnPost()
         {
-            //var value = $"{Question?.QuestionId} - {Question?.QuizId} - {Question?.Content} - {Question?.CorrectAnswerId} - {Question?.Answers.ToArray()}";
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
             _service.Add(Question);
             var value = $"{CorrectAnswer}";
 
