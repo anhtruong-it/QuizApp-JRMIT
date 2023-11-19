@@ -9,7 +9,6 @@ namespace QuizApp.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public int CreatedBy { get; set; }
-        public Users Users { get; set; }
 
         public List<Questions> Questions { get; set; }
 

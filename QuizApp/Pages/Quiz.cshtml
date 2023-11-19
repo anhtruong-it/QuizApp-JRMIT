@@ -2,3 +2,48 @@
 @model QuizApp.Pages.QuizModel
 @{
 }
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+<table class="table table-striped">
+    <thread>
+        <tr>
+            <th scope="col">Quiz Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Created By</th>
+            <th scope="col">Ations</th>
+        </tr>
+    </thread>
+    <tbody>
+        @* @foreach (var _question in Model.Questions)
+        {
+        <tr>
+        <th scope="row">@_question.QuestionId</th>
+        <td>@_question.QuizId</td>
+        <td>@_question.Content</td>
+        <td>
+        <ul>
+        @foreach (var _answer in Model.Answers.Where(a => a.QuestionId == _question.QuestionId))
+        {
+
+        @if (_answer.AnswerId == _question.CorrectAnswerId)
+        {
+        <li>@_answer.Content (Correct Answer)</li>
+        }
+        else
+        {
+        <li>@_answer.Content </li>
+        }
+
+
+        }
+        </ul>
+        </td>
+        <td><a href="/EditQuestion/@_question.QuestionId" class="btn btn-secondary">Edit Question</a></td>
+        </tr>
+        }
+        </tbody>*@
+<div style="position: fixed; bottom: 70px; right: 25px;">
+    <a href="/CreateQuiz" class="btn btn-success">Create New Quiz</a>
+</div>

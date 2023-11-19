@@ -1,0 +1,31 @@
+﻿@page
+@model QuizApp.Pages.CreateQuizModel
+@{
+    ViewData["Title"] = "Create New Quiz";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <form method="post">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input name="Quizzes.Title" type="text" class="form-control" id="title" placeholder="Title" />
+                <span asp-validation-for="@Model.Quizzes.Title"></span>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <input name="Quizzes.Description" type="text" class="form-control" id="description" placeholder="Decription"></input>
+                <span asp-validation-for="@Model.Quizzes.Description"></span>
+            </div>
+                @foreach (var _question in Model.Questions)
+                {
+                    <input name="questionid" type="checkbox" value="@_question.QuestionId" /> @_question.Content
+
+                    <br />
+                }
+            <button type="submit" class="btn btn-success">Create Question</button>
+        </form>
+    </div>
+</div>
