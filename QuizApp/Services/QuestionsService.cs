@@ -12,6 +12,8 @@ namespace QuizApp.Services
         }
 
         public List<Questions> GetAll() => _context.Questions.OrderBy(q => q.QuestionId).ToList();
+        
+        public List<Answers> GetAllAnswers() => _context.Answers.OrderBy(a => a.AnswerId).ToList();
         public void Add(Questions questions)
         {
             _context.Questions.Add(questions);
@@ -27,6 +29,11 @@ namespace QuizApp.Services
             _context.Questions.Update(questions);
             _context.SaveChanges();
 
+        }
+        public void EditAnswer(Answers answers)
+        {
+            _context.Answers.Update(answers);
+            _context.SaveChanges();
         }
 
         public Questions GetById(int id) => _context.Questions.FirstOrDefault(x => x.QuestionId == id);

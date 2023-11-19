@@ -56,10 +56,12 @@ namespace QuizApp.Pages
                 var answer = Answers[i];
                 answer.QuestionId = Question.QuestionId;
                 var ans = $"{i} - {answer.AnswerId} - {answer.QuestionId} - {answer.Content}";
-                //_service.AddAnswer(answer);
+                existingAnswer[i].QuestionId = answer.QuestionId;
+                existingAnswer[i].Content = answer.Content;
+                _service.EditAnswer(existingAnswer[i]);
                 if (Question.CorrectAnswerId == i)
                 {
-                    Question.CorrectAnswerId = answer.AnswerId;
+                    Question.CorrectAnswerId = existingAnswer[i].AnswerId;
                 }
 
             }
@@ -68,7 +70,7 @@ namespace QuizApp.Pages
             existingQuestion.Content = Question.Content;
             existingQuestion.CorrectAnswerId = Question.CorrectAnswerId;
 
-            //_service.Edit(existingQuestion);
+            _service.Edit(existingQuestion);
 
             return Redirect("/Questions");
         }

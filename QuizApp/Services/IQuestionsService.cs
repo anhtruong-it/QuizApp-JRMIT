@@ -10,7 +10,9 @@ namespace QuizApp.Services
         List<Answers> GetByQuestionId(int id);
         Answers GetByCorrectAnswerId(int id);
         List<Questions> GetAll();
+        List<Answers> GetAllAnswers();
         void Edit(Questions questions);
+        void EditAnswer(Answers answers);
 
     }
 }

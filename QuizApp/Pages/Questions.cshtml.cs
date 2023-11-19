@@ -17,6 +17,7 @@ namespace QuizApp.Pages
         public void OnGet()
         {
             Questions = _service.GetAll();
+            Answers = _service.GetAllAnswers();
         }
     }
 }
