@@ -13,6 +13,8 @@ namespace QuizApp.Services
         List<Answers> GetAllAnswers();
         void Edit(Questions questions);
         void EditAnswer(Answers answers);
+        void AddQuiz(Quizzes quizzes);
+        List<Quizzes> GetAllQuizzes();
 
     }
 }

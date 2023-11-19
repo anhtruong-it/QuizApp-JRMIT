@@ -13,37 +13,33 @@
             <th scope="col">Description</th>
             <th scope="col">Created By</th>
             <th scope="col">Ations</th>
+            <th scope="col">Questions</th>
         </tr>
     </thread>
     <tbody>
-        @* @foreach (var _question in Model.Questions)
+         @foreach (var _quiz in Model.Quizzes)
         {
         <tr>
-        <th scope="row">@_question.QuestionId</th>
-        <td>@_question.QuizId</td>
-        <td>@_question.Content</td>
+        <th scope="row">@_quiz.QuizId</th>
+        <td>@_quiz.Title</td>
+        <td>@_quiz.Description</td>
+        <td>@_quiz.CreatedBy</td>
+        <td><a href="" class="btn btn-secondary">Take the quiz</a></td>
         <td>
         <ul>
-        @foreach (var _answer in Model.Answers.Where(a => a.QuestionId == _question.QuestionId))
+        @foreach (var _questionid in _quiz.QuestionId)
         {
-
-        @if (_answer.AnswerId == _question.CorrectAnswerId)
-        {
-        <li>@_answer.Content (Correct Answer)</li>
-        }
-        else
-        {
-        <li>@_answer.Content </li>
-        }
-
-
-        }
+            @foreach(var _question in Model.Questions.Where(q => q.QuestionId == _questionid))
+            {
+                <li>@_question.Content</li>
+            }
+        } 
         </ul>
         </td>
-        <td><a href="/EditQuestion/@_question.QuestionId" class="btn btn-secondary">Edit Question</a></td>
+        
         </tr>
         }
-        </tbody>*@
+        </tbody>
 <div style="position: fixed; bottom: 70px; right: 25px;">
     <a href="/CreateQuiz" class="btn btn-success">Create New Quiz</a>
 </div>

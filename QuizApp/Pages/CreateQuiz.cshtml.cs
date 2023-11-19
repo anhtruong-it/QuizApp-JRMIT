@@ -11,6 +11,8 @@ namespace QuizApp.Pages
         public List<Questions> Questions { get; set; }
         [BindProperty]
         public Quizzes Quizzes { get; set; }
+        [BindProperty]
+        public List<int> QuestionId { get; set; }
         private IQuestionsService _service { get; set; }
         public CreateQuizModel(IQuestionsService service)
         {
@@ -19,6 +21,19 @@ namespace QuizApp.Pages
         public void OnGet()
         {
             Questions = _service.GetAll();
+        }
+        public IActionResult OnPost()
+        {
+            var value = $"{Quizzes?.QuizId} - {Quizzes?.Title} - {Quizzes?.Description} - {Quizzes?.CreatedBy} -{QuestionId.ToList()}";
+            Quizzes.QuestionId = new List<int>(new int[QuestionId.Count]);
+
+            for (var i=0; i < QuestionId.Count; i++ )
+            {
+                Quizzes.QuestionId[i] = QuestionId[i];
+                //Quizzes.Questions.Add(question);
+            }
+            _service.AddQuiz(Quizzes);
+            return Redirect("/Quiz");
         }
     }
 }
