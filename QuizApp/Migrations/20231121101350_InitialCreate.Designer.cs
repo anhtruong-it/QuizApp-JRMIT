@@ -13,8 +13,8 @@ using QuizApp.Context;
 namespace QuizApp.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20231119145719_UpdateQuiz2")]
-    partial class UpdateQuiz2
+    [Migration("20231121101350_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,8 +63,8 @@ namespace QuizApp.Migrations
                     b.Property<int>("CorrectAnswerId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("QuizId")
-                        .HasColumnType("integer");
+                    b.Property<List<int>>("QuizId")
+                        .HasColumnType("integer[]");
 
                     b.HasKey("QuestionId");
 
@@ -85,9 +85,6 @@ namespace QuizApp.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<List<int>>("QuestionId")
-                        .HasColumnType("integer[]");
 
                     b.Property<string>("Title")
                         .IsRequired()

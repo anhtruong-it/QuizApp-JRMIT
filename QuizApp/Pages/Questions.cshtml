@@ -22,7 +22,16 @@
         {
             <tr>
                 <th scope="row">@_question.QuestionId</th>
-                <td>@_question.QuizId</td>
+                <td>
+                    <ul>
+                        @foreach (var _quizid in _question.QuizId)
+                        {
+                            <li>
+                                @_quizid
+                            </li>
+                        }
+                    </ul>
+                </td>
                 <td>@_question.Content</td>
                <td>
                     <ul>

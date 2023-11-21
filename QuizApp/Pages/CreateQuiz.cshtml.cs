@@ -9,6 +9,10 @@ namespace QuizApp.Pages
     {
         [BindProperty]
         public List<Questions> Questions { get; set; }
+        
+        [BindProperty]
+        public Questions Question { get; set; }
+        
         [BindProperty]
         public Quizzes Quizzes { get; set; }
         [BindProperty]
@@ -25,14 +29,19 @@ namespace QuizApp.Pages
         public IActionResult OnPost()
         {
             var value = $"{Quizzes?.QuizId} - {Quizzes?.Title} - {Quizzes?.Description} - {Quizzes?.CreatedBy} -{QuestionId.ToList()}";
-            Quizzes.QuestionId = new List<int>(new int[QuestionId.Count]);
+            _service.AddQuiz(Quizzes);
 
-            for (var i=0; i < QuestionId.Count; i++ )
+            //Questions.QuizId = new List<int>(new int[QuestionId.Count]);
+
+            foreach (var questionid in QuestionId) 
             {
-                Quizzes.QuestionId[i] = QuestionId[i];
+                Question = _service.GetById(questionid);
+                Question.QuizId.Add(Quizzes.QuizId);
+                _service.Edit(Question);
+
                 //Quizzes.Questions.Add(question);
             }
-            _service.AddQuiz(Quizzes);
+            //_service.AddQuiz(Quizzes);
             return Redirect("/Quiz");
         }
     }

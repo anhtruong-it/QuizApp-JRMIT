@@ -9,6 +9,9 @@ namespace QuizApp.Pages
     {
         public List<Quizzes> Quizzes { get; set; }
         public List<Questions> Questions { get; set; }
+
+        public List<List<int>> QuestionId = new List<List<int>>();
+
         private IQuestionsService _service { get; set; }
         public QuizModel(IQuestionsService service)
         {
@@ -17,7 +20,21 @@ namespace QuizApp.Pages
         public void OnGet()
         {
             Quizzes = _service.GetAllQuizzes();
-            Questions = _service.GetAll();
+            
+            foreach (var quiz in Quizzes) 
+            {
+                List<int> id = new List<int>();
+                Questions = _service.GetByQuizId(quiz.QuizId);
+                var q = $"{Questions}";
+                
+                foreach (var question in Questions)
+                {
+                    id.Add(question.QuestionId);
+                    id.Distinct().ToList();
+                }
+
+                QuestionId.Add(id);
+            }
         }
     }
 }

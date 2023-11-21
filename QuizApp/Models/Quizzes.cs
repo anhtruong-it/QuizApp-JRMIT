@@ -10,7 +10,7 @@ namespace QuizApp.Models
         public string Description { get; set; }
         public int? CreatedBy { get; set; }
 
-        public List<int>? QuestionId { get; set; }
+        //public List<Questions> QuestionId { get; set; }
 
     }
 }

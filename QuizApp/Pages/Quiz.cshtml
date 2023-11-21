@@ -17,22 +17,19 @@
         </tr>
     </thread>
     <tbody>
-         @foreach (var _quiz in Model.Quizzes)
+         @for (var i = 0; i < Model.Quizzes.Count; i++)
         {
         <tr>
-        <th scope="row">@_quiz.QuizId</th>
-        <td>@_quiz.Title</td>
-        <td>@_quiz.Description</td>
-        <td>@_quiz.CreatedBy</td>
+        <th scope="row">@Model.Quizzes[i].QuizId</th>
+        <td>@Model.Quizzes[i].Title</td>
+        <td>@Model.Quizzes[i].Description</td>
+        <td>@Model.Quizzes[i].CreatedBy</td>
         <td><a href="" class="btn btn-secondary">Take the quiz</a></td>
         <td>
         <ul>
-        @foreach (var _questionid in _quiz.QuestionId)
+        @foreach (var _questionid in Model.QuestionId[i])
         {
-            @foreach(var _question in Model.Questions.Where(q => q.QuestionId == _questionid))
-            {
-                <li>@_question.Content</li>
-            }
+            <li>@_questionid</li>   
         } 
         </ul>
         </td>

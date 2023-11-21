@@ -6,6 +6,7 @@ namespace QuizApp.Services
     {
         Questions GetById(int id);
         void Add(Questions questions);
+        List<Questions> GetByQuizId(int quizId);
         void AddAnswer(Answers answers);
         List<Answers> GetByQuestionId(int id);
         Answers GetByCorrectAnswerId(int id);

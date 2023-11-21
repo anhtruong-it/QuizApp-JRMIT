@@ -60,8 +60,8 @@ namespace QuizApp.Migrations
                     b.Property<int>("CorrectAnswerId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("QuizId")
-                        .HasColumnType("integer");
+                    b.Property<List<int>>("QuizId")
+                        .HasColumnType("integer[]");
 
                     b.HasKey("QuestionId");
 
@@ -82,9 +82,6 @@ namespace QuizApp.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<List<int>>("QuestionId")
-                        .HasColumnType("integer[]");
 
                     b.Property<string>("Title")
                         .IsRequired()

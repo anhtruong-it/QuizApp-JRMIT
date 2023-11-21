@@ -27,8 +27,10 @@ namespace QuizApp.Pages
 
         public IActionResult OnPost()
         {
+            Question.QuizId = new List<int>();
+            var value = $"{CorrectAnswer} - {Question?.QuizId}";
             _service.Add(Question);
-            var value = $"{CorrectAnswer}";
+            
 
             for (int i = 0; i < Answers.Count; i++)
 

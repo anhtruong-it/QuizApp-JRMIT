@@ -6,7 +6,7 @@ namespace QuizApp.Models
     {
         [Key]
         public int QuestionId { get; set; }
-        public int? QuizId { get; set; }
+        public List<int>? QuizId { get; set; }
         public string Content { get; set; }
         public int CorrectAnswerId { get; set; }
 

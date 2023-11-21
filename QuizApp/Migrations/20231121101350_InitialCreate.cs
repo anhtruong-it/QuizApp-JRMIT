@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace QuizApp.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateQuiz2 : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +18,7 @@ namespace QuizApp.Migrations
                 {
                     QuestionId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    QuizId = table.Column<int>(type: "integer", nullable: true),
+                    QuizId = table.Column<List<int>>(type: "integer[]", nullable: true),
                     Content = table.Column<string>(type: "text", nullable: false),
                     CorrectAnswerId = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -71,7 +71,6 @@ namespace QuizApp.Migrations
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     CreatedBy = table.Column<int>(type: "integer", nullable: true),
-                    QuestionId = table.Column<List<int>>(type: "integer[]", nullable: true),
                     UsersUserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>

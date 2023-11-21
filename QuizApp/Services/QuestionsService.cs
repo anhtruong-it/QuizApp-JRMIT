@@ -1,4 +1,5 @@
-﻿using QuizApp.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using QuizApp.Context;
 using QuizApp.Models;
 
 namespace QuizApp.Services
@@ -12,6 +13,7 @@ namespace QuizApp.Services
         }
 
         public List<Questions> GetAll() => _context.Questions.OrderBy(q => q.QuestionId).ToList();
+        
         
         public List<Quizzes> GetAllQuizzes() => _context.Quizzes.OrderBy(q => q.QuizId).ToList();
         public List<Answers> GetAllAnswers() => _context.Answers.OrderBy(a => a.AnswerId).ToList();
@@ -43,7 +45,12 @@ namespace QuizApp.Services
         }
 
         public Questions GetById(int id) => _context.Questions.FirstOrDefault(x => x.QuestionId == id);
+
+       
         public List<Answers> GetByQuestionId(int id) => _context.Answers.Where(x => x.QuestionId == id).ToList();
         public Answers GetByCorrectAnswerId(int id) =>  _context.Answers.FirstOrDefault(x => x.AnswerId == id);
+
+        public List<Questions> GetByQuizId(int id) => _context.Questions.Where(q => q.QuizId.Contains(id)).ToList();
     }
+    
 }
