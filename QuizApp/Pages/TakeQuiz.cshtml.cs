@@ -50,11 +50,27 @@ namespace QuizApp.Pages
                 var selectedAnswerIdsForQuestion = Request.Form[questionName].Select(value => int.Parse(value));
                 AnswersId.AddRange(selectedAnswerIdsForQuestion);
             }
-            var correctans = CorrectAnswersId.Intersect(AnswersId);
             List<object> result = new List<object>();
-            result.Add(correctans);
+            var correctans = CorrectAnswersId.Intersect(AnswersId);
+            if (correctans.Any())
+            {
+                int count = 0;
+                foreach (var answer in correctans)
+                {
+                    count++;
+                }
+                result.Add(count);
+            }
+            else
+            {
+                result.Add(0);
+            }
+
             result.Add(Questions.Count);
-            return Redirect($"/Score/{result}");
+            var a = $"{result}";
+            var resultString = string.Join(", ", result);
+            return Redirect($"/Score?result={resultString}");
+            
         }
     }
 }
