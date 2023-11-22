@@ -24,7 +24,7 @@
         <td>@Model.Quizzes[i].Title</td>
         <td>@Model.Quizzes[i].Description</td>
         <td>@Model.Quizzes[i].CreatedBy</td>
-        <td><a href="" class="btn btn-secondary">Take the quiz</a></td>
+        <td><a href="/TakeQuiz/@Model.Quizzes[i].QuizId" class="btn btn-secondary">Take the quiz</a></td>
         <td>
         <ul>
         @foreach (var _questionid in Model.QuestionId[i])

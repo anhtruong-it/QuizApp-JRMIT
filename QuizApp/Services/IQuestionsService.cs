@@ -16,6 +16,7 @@ namespace QuizApp.Services
         void EditAnswer(Answers answers);
         void AddQuiz(Quizzes quizzes);
         List<Quizzes> GetAllQuizzes();
+        Quizzes GetQuizById(int id);
 
     }
 }
