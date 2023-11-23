@@ -17,9 +17,15 @@ namespace QuizApp.Services
         
         public List<Quizzes> GetAllQuizzes() => _context.Quizzes.OrderBy(q => q.QuizId).ToList();
         public List<Answers> GetAllAnswers() => _context.Answers.OrderBy(a => a.AnswerId).ToList();
+        public List<Users> GetAllUsers() => _context.Users.ToList();
         public void Add(Questions questions)
         {
             _context.Questions.Add(questions);
+            _context.SaveChanges();
+        }
+        public void AddUser(Users user)
+        {
+            _context.Users.Add(user);
             _context.SaveChanges();
         }
         public void AddQuiz(Quizzes quizzes)
@@ -46,6 +52,7 @@ namespace QuizApp.Services
 
         public Questions GetById(int id) => _context.Questions.FirstOrDefault(x => x.QuestionId == id);
 
+        public Users GetUserByUserName(string username) => _context.Users.FirstOrDefault(u => u.Username == username);
        
         public List<Answers> GetByQuestionId(int id) => _context.Answers.Where(x => x.QuestionId == id).ToList();
         public Answers GetByCorrectAnswerId(int id) =>  _context.Answers.FirstOrDefault(x => x.AnswerId == id);

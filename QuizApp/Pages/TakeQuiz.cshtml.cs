@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using QuizApp.Models;
 using QuizApp.Services;
+using System.Threading.Tasks;
 
 namespace QuizApp.Pages
 {
@@ -16,6 +17,7 @@ namespace QuizApp.Pages
 
         public List<int> AnswersId = new List<int>();
         public List<int> CorrectAnswersId = new List<int>();
+        public int CountDown { get; set; } = 5;
         private IQuestionsService _service { get; set; }
         public TakeQuizModel(IQuestionsService service)
         {
@@ -71,6 +73,12 @@ namespace QuizApp.Pages
             var resultString = string.Join(", ", result);
             return Redirect($"/Score?result={resultString}");
             
+        }
+
+        public async Task<IActionResult> OnPostStartCoutdown(int id)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(CountDown));
+            return RedirectToPage("TakeQuiz", new { id });
         }
     }
 }

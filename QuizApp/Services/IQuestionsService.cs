@@ -17,6 +17,9 @@ namespace QuizApp.Services
         void AddQuiz(Quizzes quizzes);
         List<Quizzes> GetAllQuizzes();
         Quizzes GetQuizById(int id);
+        void AddUser(Users user);
+        List<Users> GetAllUsers();
+        Users GetUserByUserName(string userName);
 
     }
 }

@@ -2,10 +2,11 @@
 @model QuizApp.Pages.TakeQuizModel
 @{
     ViewData["Title"] = "Taking a Quiz";
+    HttpContext.Response.Headers.Add("Refresh", $"{Model.CountDown};url={Url.Page("TakeQuiz")}");
 }
 <h3>@ViewData[$"Title"]</h3>
 <hr />
-<form method="post">
+<form method="post" id="quizForm">
     @for ( var i = 0; i < Model.Questions.Count; i++)
     {
         <h5>@Model.Questions[i].Content</h5>
@@ -23,3 +24,25 @@
     }
     <button type="submit" class="btn btn-success">Submit answers</button>
 </form>
+<p>Countdown: <span id="countdownDisplay">@Model.CountDown</span> seconds</p>
+<script>
+    var countdown = @Model.CountDown;
+
+    function startCountdown() {
+        var countdownDisplay = document.getElementById("countdownDisplay");
+
+        var countdownInterval = setInterval(function () {
+            countdownDisplay.innerText = countdown;
+            countdown--;
+
+            if (countdown < 1) {
+                clearInterval(countdownInterval);
+                document.getElementById("quizForm").submit(); // Submit the form when countdown reaches zero
+            }
+        }, 1000);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        startCountdown();
+    });
+</script>

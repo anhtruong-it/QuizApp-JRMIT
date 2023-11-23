@@ -29,6 +29,8 @@ namespace QuizApp.Pages
         public IActionResult OnPost()
         {
             var value = $"{Quizzes?.QuizId} - {Quizzes?.Title} - {Quizzes?.Description} - {Quizzes?.CreatedBy} -{QuestionId.ToList()}";
+            string storeUsername = HttpContext.Request.Cookies["Username"];
+            Quizzes.CreatedBy = storeUsername;
             _service.AddQuiz(Quizzes);
 
             //Questions.QuizId = new List<int>(new int[QuestionId.Count]);

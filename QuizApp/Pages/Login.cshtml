@@ -1,0 +1,25 @@
+﻿@page
+@model QuizApp.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+<h3></h3>
+<hr />
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <form method="post">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input name="User.Username" type="text" class="form-control" id="username" placeholder="Username" />
+                    <span asp-validation-for="@Model.Users.Username"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input name="User.PasswordHash" type="password" class="form-control" id="password" placeholder="Password"></input>
+                    <span asp-validation-for="@Model.Users.PasswordHash"></span>
+                </div>
+
+                <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+

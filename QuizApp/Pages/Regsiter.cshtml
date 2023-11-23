@@ -1,0 +1,30 @@
+﻿@page
+@model QuizApp.Pages.RegsiterModel
+@{
+    ViewData["Title"] = "Register";
+}
+<h3></h3>
+<hr />
+
+
+</div>
+<div class="col-md-6 offset-3">
+        <form method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input name="User.Username" type="text" class="form-control" id="username" placeholder="Username" />
+                <span asp-validation-for="@Model.User.Username"></span>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input name="User.Email" type="email" class="form-control" id="email" placeholder="Email" />
+                <span asp-validation-for="@Model.User.Email"></span>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input name="User.PasswordHash" type="password" class="form-control" id="password" placeholder="Password"></input>
+                <span asp-validation-for="@Model.User.PasswordHash"></span>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+</div>

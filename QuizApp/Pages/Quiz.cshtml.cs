@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using QuizApp.Models;
 using QuizApp.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace QuizApp.Pages
 {
@@ -19,6 +20,8 @@ namespace QuizApp.Pages
         }
         public void OnGet()
         {
+            string storeUsername = HttpContext.Request.Cookies["Username"];
+            var u = $"{storeUsername}";
             Quizzes = _service.GetAllQuizzes();
             
             foreach (var quiz in Quizzes) 
