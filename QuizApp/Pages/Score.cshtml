@@ -1,8 +1,10 @@
 ﻿@page
 @model QuizApp.Pages.ScoreModel
 @{
+    //Get value from TakeQuiz Page
     var resultString = Request.Query["result"].ToString();
     List<int> resultList = resultString.Split(',').Select(int.Parse).ToList();
+
     ViewData["Title"] = "Score";
 }
 <h3>@ViewData["Title"]</h3>

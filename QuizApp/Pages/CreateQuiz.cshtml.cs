@@ -15,6 +15,7 @@ namespace QuizApp.Pages
         
         [BindProperty]
         public Quizzes Quizzes { get; set; }
+
         [BindProperty]
         public List<int> QuestionId { get; set; }
         private IQuestionsService _service { get; set; }

@@ -11,8 +11,5 @@ namespace QuizApp.Models
         public int CorrectAnswerId { get; set; }
 
         public List<Answers> Answers { get; set; }
-
-
-
     }
 }

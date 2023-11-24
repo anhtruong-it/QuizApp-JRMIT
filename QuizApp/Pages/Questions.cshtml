@@ -13,7 +13,6 @@
             <th scope="col">Quiz Id</th>
             <th scope="col">Content</th>
             <th scope="col">Answer</th>
-
             <th scope="col">Ations</th>
         </tr>
     </thread>
@@ -37,16 +36,13 @@
                     <ul>
                         @foreach (var _answer in Model.Answers.Where(a => a.QuestionId == _question.QuestionId))
                         {
-                            
-                                @if (_answer.AnswerId == _question.CorrectAnswerId)
-                                {
-                                    <li>@_answer.Content (Correct Answer)</li>
-                                }else
-                                {
+                            @if (_answer.AnswerId == _question.CorrectAnswerId)
+                            { 
+                                <li>@_answer.Content (Correct Answer)</li> 
+                            }else
+                            {
                                 <li>@_answer.Content </li>
-                                }
-                            
-                            
+                            }
                         }
                     </ul>
                 </td>

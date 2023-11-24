@@ -6,10 +6,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
 builder.Services.AddDbContext<DBContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
 builder.Services.AddScoped<IQuestionsService, QuestionsService>();
 
 var app = builder.Build();
@@ -26,6 +28,5 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
 
 app.Run();

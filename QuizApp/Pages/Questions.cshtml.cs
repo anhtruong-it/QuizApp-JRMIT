@@ -9,6 +9,7 @@ namespace QuizApp.Pages
     {
         public List<Questions> Questions { get; set; }
         public List<Answers> Answers { get; set; }
+
         private IQuestionsService _service { get; set; }
         public QuestionsModel(IQuestionsService service)
         { 

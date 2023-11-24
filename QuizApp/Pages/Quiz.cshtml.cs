@@ -18,24 +18,21 @@ namespace QuizApp.Pages
         {
             _service = service;
         }
+
         public void OnGet()
         {
-            string storeUsername = HttpContext.Request.Cookies["Username"];
-            var u = $"{storeUsername}";
             Quizzes = _service.GetAllQuizzes();
             
             foreach (var quiz in Quizzes) 
             {
                 List<int> id = new List<int>();
                 Questions = _service.GetByQuizId(quiz.QuizId);
-                var q = $"{Questions}";
                 
                 foreach (var question in Questions)
                 {
                     id.Add(question.QuestionId);
                     id.Distinct().ToList();
                 }
-
                 QuestionId.Add(id);
             }
         }

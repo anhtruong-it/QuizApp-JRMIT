@@ -9,19 +9,23 @@ namespace QuizApp.Pages
     {
         [BindProperty]
         public Questions Question { get; set; }
+
         [BindProperty]
         public List<Answers> Answers { get; set; }
-        public Answers CorrectAnswer { get; set; }
 
         [BindProperty]
         public int CorrectAnswerId { get; set; }
+        public Answers CorrectAnswer { get; set; }
+
         private IQuestionsService _service { get; set; }
         public EditQuestionModel(IQuestionsService service)
         {
             _service = service;
         }
+
         public IActionResult OnGet(int id)
         {
+            // Retrieve a question and its answers from database
             Question = _service.GetById(id);
             Answers = _service.GetByQuestionId(Question.QuestionId);
             
@@ -29,19 +33,19 @@ namespace QuizApp.Pages
             {
                 return NotFound();
             }
-
             return Page();
         }
 
         public IActionResult OnPost()
         {
-            var value = $"{Question?.QuestionId} - {Question?.QuizId} - {Question?.Content} - {Question?.CorrectAnswerId}";
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
+            //Check valid form
+            bool ValidAnswers = Answers.All(answer => !string.IsNullOrEmpty(answer.Content));
+            if (!ValidAnswers)
+            {
+                return Page();
+            }
 
-
+            // Update the question and answers
             var existingQuestion = _service.GetById(Question.QuestionId);
             var existingAnswer = _service.GetByQuestionId(Question.QuestionId);
 
@@ -55,18 +59,17 @@ namespace QuizApp.Pages
             {
                 var answer = Answers[i];
                 answer.QuestionId = Question.QuestionId;
-                var ans = $"{i} - {answer.AnswerId} - {answer.QuestionId} - {answer.Content}";
+
                 existingAnswer[i].QuestionId = answer.QuestionId;
                 existingAnswer[i].Content = answer.Content;
                 _service.EditAnswer(existingAnswer[i]);
+
                 if (Question.CorrectAnswerId == i)
                 {
                     Question.CorrectAnswerId = existingAnswer[i].AnswerId;
                 }
-
             }
 
-            existingQuestion.QuizId = Question.QuizId;
             existingQuestion.Content = Question.Content;
             existingQuestion.CorrectAnswerId = Question.CorrectAnswerId;
 

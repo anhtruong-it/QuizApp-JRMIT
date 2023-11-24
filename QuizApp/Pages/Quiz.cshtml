@@ -13,30 +13,29 @@
             <th scope="col">Description</th>
             <th scope="col">Created By</th>
             <th scope="col">Ations</th>
-            <th scope="col">Questions</th>
+            <th scope="col">Question ID</th>
         </tr>
     </thread>
     <tbody>
          @for (var i = 0; i < Model.Quizzes.Count; i++)
-        {
-        <tr>
-        <th scope="row">@Model.Quizzes[i].QuizId</th>
-        <td>@Model.Quizzes[i].Title</td>
-        <td>@Model.Quizzes[i].Description</td>
-        <td>@Model.Quizzes[i].CreatedBy</td>
-        <td><a href="/TakeQuiz/@Model.Quizzes[i].QuizId" class="btn btn-secondary">Take the quiz</a></td>
-        <td>
-        <ul>
-        @foreach (var _questionid in Model.QuestionId[i])
-        {
-            <li>@_questionid</li>   
-        } 
-        </ul>
-        </td>
-        
-        </tr>
-        }
+            {
+                <tr>
+                    <th scope="row">@Model.Quizzes[i].QuizId</th>
+                    <td>@Model.Quizzes[i].Title</td>
+                    <td>@Model.Quizzes[i].Description</td>
+                    <td>@Model.Quizzes[i].CreatedBy</td>
+                    <td><a href="/TakeQuiz/@Model.Quizzes[i].QuizId" class="btn btn-secondary">Take the quiz</a></td>
+                    <td>
+                        <ul>
+                            @foreach (var _questionid in Model.QuestionId[i])
+                            {
+                                <li>@_questionid</li>   
+                            } 
+                        </ul>
+                    </td>
+                </tr>
+            }
         </tbody>
-<div style="position: fixed; bottom: 70px; right: 25px;">
+    <div style="position: fixed; bottom: 70px; right: 25px;">
     <a href="/CreateQuiz" class="btn btn-success">Create New Quiz</a>
 </div>

@@ -21,39 +21,36 @@ namespace QuizApp.Pages
         {
             _service = service;
         }
+
         public void OnGet()
         {
         }
 
         public IActionResult OnPost()
         {
+            // Create new question without answers
             Question.QuizId = new List<int>();
-            var value = $"{CorrectAnswer} - {Question?.QuizId}";
             _service.Add(Question);
             
-
+            // Assign question ID to answers coressponding
             for (int i = 0; i < Answers.Count; i++)
-
             {
                 var answer = Answers[i];
                 answer.QuestionId = Question.QuestionId;
-                var ans = $"{i} - {answer.AnswerId} - {answer.QuestionId} - {answer.Content}";
                 _service.AddAnswer(answer);
                 if (CorrectAnswer == i)
                 {
                     Question.CorrectAnswerId = answer.AnswerId;
                 }
-
             }
+
+            // Retrieve question and store with answers
             var existingQuestion = _service.GetById(Question.QuestionId);
             existingQuestion.QuizId = Question.QuizId;
             existingQuestion.Content = Question.Content;
             existingQuestion.CorrectAnswerId = Question.CorrectAnswerId;
             _service.Edit(existingQuestion);
         
-
-
-            //return Redirect($"/CreateAnswers/{Question.QuestionId}");
             return Redirect("/Questions");
         }
     }

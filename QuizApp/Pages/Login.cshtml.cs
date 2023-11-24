@@ -13,15 +13,16 @@ namespace QuizApp.Pages
         public Users Users { get; set; }
         public bool Authentication { get; set; } = false;
         public bool Logined { get; set; } = false;
+
         private IQuestionsService _service { get; set; }
         public LoginModel(IQuestionsService service)
         {
             _service = service;
         }
 
-
         public IActionResult OnGet()
         {
+            // Check user logined or not
             string storeUsername = HttpContext.Request.Cookies["Username"];
             if (storeUsername != null)
             {
@@ -32,6 +33,7 @@ namespace QuizApp.Pages
 
         public IActionResult OnPost()
         {
+            // Handle loin and logout forms
             var formId = HttpContext.Request.Form["action"];
 
             if (formId == "login")
