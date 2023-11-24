@@ -22,9 +22,15 @@ namespace QuizApp.Pages
         {
             _service = service;
         }
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            string storeUsername = HttpContext.Request.Cookies["Username"];
+            if (storeUsername == null)
+            {
+                return Redirect("/Login");
+            }
             Questions = _service.GetAll();
+            return Page();
         }
         public IActionResult OnPost()
         {

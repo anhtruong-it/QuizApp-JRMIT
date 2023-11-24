@@ -17,6 +17,7 @@ namespace QuizApp.Pages
 
         public List<int> AnswersId = new List<int>();
         public List<int> CorrectAnswersId = new List<int>();
+        //pyblic List<>
         public int CountDown { get; set; } = 5;
         private IQuestionsService _service { get; set; }
         public TakeQuizModel(IQuestionsService service)
@@ -26,10 +27,16 @@ namespace QuizApp.Pages
         public IActionResult OnGet(int id)
         {
             Quizzes = _service.GetQuizById(id);
-            var quiz = $"{Quizzes.QuizId} - {Quizzes.Title} - {Quizzes.Description}";
+
+            Random random = new Random();
+            
+
             Questions = _service.GetByQuizId(id);
-            var question = $"{Questions.Count}";
-            foreach (var questionid in Questions)
+            var randomQuestions = Questions.OrderBy(x => random.Next()).ToList();
+            var value = $"{randomQuestions}";
+            Questions = randomQuestions;
+
+            foreach (var questionid in randomQuestions)
             {   List<object> ans = new List<object>();
                 Answers = _service.GetByQuestionId(questionid.QuestionId);
                 var b = $"{Answers[0].AnswerId}";

@@ -12,6 +12,7 @@ namespace QuizApp.Pages
         public Users User { get; set; }
         public Users Users { get; set; }
         public bool Authentication { get; set; } = false;
+        public bool Logined { get; set; } = false;
         private IQuestionsService _service { get; set; }
         public LoginModel(IQuestionsService service)
         {
@@ -19,24 +20,39 @@ namespace QuizApp.Pages
         }
 
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            string storeUsername = HttpContext.Request.Cookies["Username"];
+            if (storeUsername != null)
+            {
+                Logined = true;
+            }
+            return Page();
         }
 
         public IActionResult OnPost()
         {
-            Users = _service.GetUserByUserName(User.Username);
-            if (Users != null) 
-            {
-                Authentication = BCrypt.Net.BCrypt.Verify(User.PasswordHash, Users.PasswordHash);
+            var formId = HttpContext.Request.Form["action"];
 
-                if (Authentication)
+            if (formId == "login")
+            {
+                Users = _service.GetUserByUserName(User.Username);
+                if (Users != null)
                 {
-                    Response.Cookies.Append("Username", User.Username);
-                    return Redirect("/Quiz");
+                    Authentication = BCrypt.Net.BCrypt.Verify(User.PasswordHash, Users.PasswordHash);
+
+                    if (Authentication)
+                    {
+                        Response.Cookies.Append("Username", User.Username);
+                        return Redirect("/Quiz");
+                    }
                 }
             }
+            else
+            {
+                Response.Cookies.Delete("Username");
+            }
+
             return Page();
         }
     }
